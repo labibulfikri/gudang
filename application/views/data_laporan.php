@@ -24,6 +24,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Surat Jalan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Barang</th>
                             <th scope="col">Dari / Kepada </th>
@@ -34,25 +35,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; 
-                         $jum = 1;
-                        ?> 
+                        <?php 
+                        $totalmasuk = 0;
+                        $totalkeluar = 0;
+                        $jum = 1;
+                         $no = 1; ?> 
                         <?php
                         if (is_array($data) && count($data) > 0) {
                              foreach ($data as $key) { ?>
-                            <tr>
-                                <td> <?php echo $no++; ?> </td>
-                                <td> <?php echo $key->tgl_transaksi?> </td>
-                                <td> <?php echo $key->nama_barang?> </td>
-                                <td> <?php echo $key->nama_pelanggan?> </td>
-                                <td> <?php echo $key->jenis_transaksi?> </td>
-                                <td> <?php echo $key->stok_det?> </td>
-                                <td> <?php echo $key->qty?> </td>
-                                <td> <?php echo $key->sisa?> </td>
-
+                            <?php if ($jum <= 1) { ?>
+                                <tr>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $no++; ?> </td>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $key->surat_jalan?> </td>
+                               
+                                        <?php $jum = $key->jumlah;  } else {  $jum = $jum - 1; } ?>
+                                        <td > <?php echo $key->tgl_transaksi?> </td>
+                                <td > <?php echo $key->nama_barang?> </td>
+                                <td > <?php echo $key->nama_pelanggan?> </td>
+                                <td > <?php echo $key->jenis_transaksi?> </td>
+                                <td > <?php echo $key->stok_det; ?> </td>
+                                <?php if ($key->jenis_transaksi == "masuk"){ ?>
+                                    <td > <?php echo $key->qty; ?> </td>                                    
+                                    <td > <?php echo $key->sisa;?></td>
+                                    
+                                    <?php } else { ?> 
+                                        <td > <?php echo $key->qty;?></td>
+                                        <td > <?php echo $key->sisa;?></td>
+                                        
+                                        <?php } ?>  
+                                       
                             </tr>
-
-                        <?php } }else { ?>
+                            
+                            <?php    }   ?> 
+                             
+                    <?php }else { ?>
                             
                         <?php } ?>
                     </tbody>

@@ -11,7 +11,7 @@ class M_laporan extends CI_Model
 
     public function barang($tgldari,$tglsampai)
     {
-        $this->db->select('transaksi.id_transaksi, transaksi.jenis_transaksi,transaksi.tgl_transaksi,transaksi_det.id_barang,transaksi_det.qty,barang.nama_barang,transaksi_det.stok_det,transaksi_det.sisa,pelanggan.nama_pelanggan');
+        $this->db->select('transaksi.surat_jalan,transaksi.id_transaksi, transaksi.jenis_transaksi,transaksi.tgl_transaksi,transaksi_det.id_barang,transaksi_det.qty,barang.nama_barang,transaksi_det.stok_det,transaksi_det.sisa,pelanggan.nama_pelanggan, ( SELECT COUNT( transaksi_det.id_transaksi ) FROM transaksi_det WHERE transaksi_det.id_transaksi = transaksi.id_transaksi )as jumlah ');
         $this->db->from('transaksi');
         
         
@@ -22,7 +22,7 @@ class M_laporan extends CI_Model
         $this->db->where('transaksi.tgl_transaksi >=', $tgldari);
         $this->db->where('transaksi.tgl_transaksi <=', $tglsampai);
 
-        $this->db->order_by('transaksi.tgl_transaksi', 'ASC');
+        $this->db->order_by('transaksi.surat_jalan', 'ASC');
         $query = $this->db->get();
 
         // $a = $this->db->last_query($query);
