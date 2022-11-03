@@ -25,6 +25,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Surat Jalan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Barang</th>
                             <th scope="col">Dari / Kepada </th>
@@ -38,30 +39,36 @@
                         <?php 
                         $totalmasuk = 0;
                         $totalkeluar = 0;
+                        $jum = 1;
                          $no = 1; ?> 
                         <?php
                         if (is_array($bri) && count($bri) > 0) {
                              foreach ($bri as $key) { ?>
-                            <tr>
-                                <td> <?php echo $no++; ?> </td>
-                                <td> <?php echo $key->tgl_transaksi?> </td>
-                                <td> <?php echo $key->nama_barang?> </td>
-                                <td> <?php echo $key->nama_pelanggan?> </td>
-                                <td> <?php echo $key->jenis_transaksi?> </td>
+                            <?php if ($jum <= 1) { ?>
+                                <tr>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $no++; ?> </td>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $key->surat_jalan?> </td>
+                               
+                                        <?php $jum = $key->jumlah;  } else {  $jum = $jum - 1; } ?>
+                                        <td > <?php echo $key->tgl_transaksi?> </td>
+                                <td > <?php echo $key->nama_barang?> </td>
+                                <td > <?php echo $key->nama_pelanggan?> </td>
+                                <td > <?php echo $key->jenis_transaksi?> </td>
                                 <?php if ($key->jenis_transaksi == "masuk"){ ?>
-                                    <td> <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
-                                    <td> 0 </td>
-                                    <?php } else{ ?>
-                                        <td> 0 </td>
-                                        <td> <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
-
-                                <?php }?> 
-                                <td> </td>
+                                    <td > <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
+                                    <td > 0 </td>
+                                    <?php } else { ?>
+                                        <td > 0 </td>
+                                        <td > <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
+                                        
+                                        <?php } ?> 
+                                        <td> </td>
+                                       
                             </tr>
                             
                             <?php    }   ?> 
                             <tr>
-                                 <td colspan="5"> TOtal</td> 
+                                 <td colspan="6"> TOtal</td> 
                                  <td >  <?php echo $totalmasuk?> </td> 
                                  <td >  <?php echo $totalkeluar?> </td> 
                                  <td >  <?php echo $sisa = $totalmasuk - $totalkeluar  ?> </td> 
@@ -80,7 +87,8 @@
                     BANK BCA GOLD
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">#</th>                            
+                            <th scope="col">Surat Jalan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Barang</th>
                             <th scope="col">Dari / Kepada </th>
@@ -94,30 +102,36 @@
                         <?php 
                         $totalmasuk = 0;
                         $totalkeluar = 0;
+                        $jum = 1;
                          $no = 1; ?> 
                         <?php
                         if (is_array($bcagold) && count($bcagold) > 0) {
                              foreach ($bcagold as $key) { ?>
-                            <tr>
-                                <td> <?php echo $no++; ?> </td>
-                                <td> <?php echo $key->tgl_transaksi?> </td>
-                                <td> <?php echo $key->nama_barang?> </td>
-                                <td> <?php echo $key->nama_pelanggan?> </td>
-                                <td> <?php echo $key->jenis_transaksi?> </td>
+                            <?php if ($jum <= 1) { ?>
+                                <tr>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $no++; ?> </td>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $key->surat_jalan?> </td>
+                               
+                                        <?php $jum = $key->jumlah;  } else {  $jum = $jum - 1; } ?>
+                                        <td > <?php echo $key->tgl_transaksi?> </td>
+                                <td > <?php echo $key->nama_barang?> </td>
+                                <td > <?php echo $key->nama_pelanggan?> </td>
+                                <td > <?php echo $key->jenis_transaksi?> </td>
                                 <?php if ($key->jenis_transaksi == "masuk"){ ?>
-                                    <td> <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
-                                    <td> 0 </td>
-                                    <?php } else{ ?>
-                                        <td> 0 </td>
-                                        <td> <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
-
-                                <?php }?> 
-                                <td> </td>
+                                    <td > <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
+                                    <td > 0 </td>
+                                    <?php } else { ?>
+                                        <td > 0 </td>
+                                        <td > <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
+                                        
+                                        <?php } ?> 
+                                        <td> </td>
+                                       
                             </tr>
                             
                             <?php    }   ?> 
                             <tr>
-                                 <td colspan="5"> TOtal</td> 
+                                 <td colspan="6"> TOtal</td> 
                                  <td >  <?php echo $totalmasuk?> </td> 
                                  <td >  <?php echo $totalkeluar?> </td> 
                                  <td >  <?php echo $sisa = $totalmasuk - $totalkeluar  ?> </td> 
@@ -133,7 +147,8 @@
                     BANK BCA PLATINUM
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">#</th>                            
+                            <th scope="col">Surat Jalan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Barang</th>
                             <th scope="col">Dari / Kepada </th>
@@ -147,30 +162,36 @@
                         <?php 
                         $totalmasuk = 0;
                         $totalkeluar = 0;
+                        $jum = 1;
                          $no = 1; ?> 
                         <?php
                         if (is_array($bcaplatinum) && count($bcaplatinum) > 0) {
                              foreach ($bcaplatinum as $key) { ?>
-                            <tr>
-                                <td> <?php echo $no++; ?> </td>
-                                <td> <?php echo $key->tgl_transaksi?> </td>
-                                <td> <?php echo $key->nama_barang?> </td>
-                                <td> <?php echo $key->nama_pelanggan?> </td>
-                                <td> <?php echo $key->jenis_transaksi?> </td>
+                            <?php if ($jum <= 1) { ?>
+                                <tr>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $no++; ?> </td>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $key->surat_jalan?> </td>
+                               
+                                        <?php $jum = $key->jumlah;  } else {  $jum = $jum - 1; } ?>
+                                        <td > <?php echo $key->tgl_transaksi?> </td>
+                                <td > <?php echo $key->nama_barang?> </td>
+                                <td > <?php echo $key->nama_pelanggan?> </td>
+                                <td > <?php echo $key->jenis_transaksi?> </td>
                                 <?php if ($key->jenis_transaksi == "masuk"){ ?>
-                                    <td> <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
-                                    <td> 0 </td>
-                                    <?php } else{ ?>
-                                        <td> 0 </td>
-                                        <td> <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
-
-                                <?php }?> 
-                                <td> </td>
+                                    <td > <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
+                                    <td > 0 </td>
+                                    <?php } else { ?>
+                                        <td > 0 </td>
+                                        <td > <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
+                                        
+                                        <?php } ?> 
+                                        <td> </td>
+                                       
                             </tr>
                             
                             <?php    }   ?> 
                             <tr>
-                                 <td colspan="5"> TOtal</td> 
+                                 <td colspan="6"> TOtal</td> 
                                  <td >  <?php echo $totalmasuk?> </td> 
                                  <td >  <?php echo $totalkeluar?> </td> 
                                  <td >  <?php echo $sisa = $totalmasuk - $totalkeluar  ?> </td> 
@@ -187,6 +208,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Surat Jalan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Barang</th>
                             <th scope="col">Dari / Kepada </th>
@@ -200,30 +222,36 @@
                         <?php 
                         $totalmasuk = 0;
                         $totalkeluar = 0;
+                        $jum = 1;
                          $no = 1; ?> 
                         <?php
                         if (is_array($tunai) && count($tunai) > 0) {
                              foreach ($tunai as $key) { ?>
-                            <tr>
-                                <td> <?php echo $no++; ?> </td>
-                                <td> <?php echo $key->tgl_transaksi?> </td>
-                                <td> <?php echo $key->nama_barang?> </td>
-                                <td> <?php echo $key->nama_pelanggan?> </td>
-                                <td> <?php echo $key->jenis_transaksi?> </td>
+                            <?php if ($jum <= 1) { ?>
+                                <tr>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $no++; ?> </td>
+                                <td rowspan="<?php echo $key->jumlah;?>" > <?php echo $key->surat_jalan?> </td>
+                               
+                                        <?php $jum = $key->jumlah;  } else {  $jum = $jum - 1; } ?>
+                                        <td > <?php echo $key->tgl_transaksi?> </td>
+                                <td > <?php echo $key->nama_barang?> </td>
+                                <td > <?php echo $key->nama_pelanggan?> </td>
+                                <td > <?php echo $key->jenis_transaksi?> </td>
                                 <?php if ($key->jenis_transaksi == "masuk"){ ?>
-                                    <td> <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
-                                    <td> 0 </td>
-                                    <?php } else{ ?>
-                                        <td> 0 </td>
-                                        <td> <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
-
-                                <?php }?> 
-                                <td> </td>
+                                    <td > <?php echo $key->total_harga; $totalmasuk += $key->total_harga;  ?> </td>
+                                    <td > 0 </td>
+                                    <?php } else { ?>
+                                        <td > 0 </td>
+                                        <td > <?php echo $key->total_harga; $totalkeluar += $key->total_harga;?> </td>
+                                        
+                                        <?php } ?> 
+                                        <td> </td>
+                                       
                             </tr>
                             
                             <?php    }   ?> 
                             <tr>
-                                 <td colspan="5"> TOtal</td> 
+                                 <td colspan="6"> TOtal</td> 
                                  <td >  <?php echo $totalmasuk?> </td> 
                                  <td >  <?php echo $totalkeluar?> </td> 
                                  <td >  <?php echo $sisa = $totalmasuk - $totalkeluar  ?> </td> 

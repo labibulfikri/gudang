@@ -34,7 +34,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; ?> 
+                        <?php $no = 1; 
+                         $jum = 1;
+                        ?> 
                         <?php
                         if (is_array($data) && count($data) > 0) {
                              foreach ($data as $key) { ?>
